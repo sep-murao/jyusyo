@@ -1,0 +1,20 @@
+@charset "UTF-8";
+.table{
+position: absolute;
+	left:170px;
+}
+
+.botan{
+	position: absolute;
+	top:187px;
+	left:200px;
+	display:flex;
+}
+
+
+p{
+    color:red;
+    position: absolute;
+	top:210px;
+	left:200px;
+}

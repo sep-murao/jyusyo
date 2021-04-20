@@ -1,0 +1,13 @@
+@charset "UTF-8";
+
+.table2{
+position: absolute;
+	left:185px;
+}
+
+.botan2{
+	position: absolute;
+	top:187px;
+	left:200px;
+	display:flex;
+}
