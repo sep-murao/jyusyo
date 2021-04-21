@@ -1,17 +1,15 @@
 package jyushoroku;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 
 /**
  * Servlet implementation class AddCommitBL
@@ -48,28 +46,33 @@ public class AddCommitBL extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
 		 
-		 String name = request.getParameter("name");
-		 String address = request.getParameter("address");
+		 Connection connect = null;
+		 PreparedStatement stmt = null;
+		
+		 String name = request.getParameter(name);
+		 String address = request.getParameter(address);
 		 String tel = request.getParameter("tel");
-		 String categoryid = request.getParameter("categoryid");
+		 String categoryid = request.getParameter(categoryid);
 		 
 		 try {
 		 Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-			PreparedStatement stmt = connect.prepareStatement(
-			"insert into jyusyoroku (name,address,tel,categoryid)values(?,?,?,?)");
+			stmt = connect.prepareStatement(
+			"insert into jyusyoroku (name,address,tel,categoryid)values(?,?,?,?);");
 		
 			stmt.setString(1, name);
    		    stmt.setString(2, address );
-   		    stmt.setString(1, tel );
-		    stmt.setString(2, categoryid );
+   		    stmt.setString(3, tel );
+		    stmt.setString(4, categoryid );
 		    
-		     int rs = stmt.executeUpdate();
+		   int rs = stmt.executeUpdate();
 			 
 		 } catch(Exception e){
 				e.printStackTrace();
 	}
-		// return rs;
+	
+		 response.sendRedirect("/ListBL.java");
+		 
 }
 	
 }
