@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddCommitBL
  */
-@WebServlet("/AddCommitBL")
-public class AddCommitBL extends HttpServlet {
+@WebServlet("/DeleteCommitBL")
+public class DeleteCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connect = null;
 	    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s?useUnicode=true&characterEncoding=utf8";
@@ -25,7 +25,7 @@ public class AddCommitBL extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddCommitBL() {
+    public DeleteCommitBL() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,30 +49,16 @@ public class AddCommitBL extends HttpServlet {
 		 Connection connect = null;
 		 PreparedStatement stmt = null;
 		
-		 String name = request.getParameter("name");
-		 String address = request.getParameter("address");
-		 String tel = request.getParameter("tel");
-		 String categoryid = request.getParameter("categoryid");
-		 
-		 //電話番号抜き出し
-		 String tel1 = tel.substring(0,3);
-		 String tel2 = tel.substring(4,8);
-		 String tel3 = tel.substring(9,13);
-		 
-		 String tell = tel1 + tel2 + tel3;
-		 
-		 //response.setContentType("text/html; charset=Shift_JIS");
+		 String id = request.getParameter("id");
+
 		 
 		 try {
 		 Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.prepareStatement(
-			"insert into jyusyoroku (name,address,tel,categoryid,delete_flg)values(?,?,?,?,0);");
+			"delete from jyusyoroku where id = ?;");
 		
-			stmt.setString(1, name);
-   		    stmt.setString(2, address );
-   		    stmt.setString(3, tell );
-		    stmt.setString(4, categoryid );
+		    stmt.setString(1, id);
 		    
 		   int rs = stmt.executeUpdate();
 			 

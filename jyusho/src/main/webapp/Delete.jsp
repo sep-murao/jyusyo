@@ -24,41 +24,33 @@
      String errmsg ="";
      
      ResultSet rs = Cmmon.getCategoryAll();
+     String categoryname = Cmmon.getCategoryName(categoryid);  
      
      
  %>
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="Add.css">
+<link rel="stylesheet" href="Delete.css">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 </head>
 <meta charset="UTF-8">
 <title>Edit</title>
 </head>
 <body>
-<h2>住所録管理システム：住所録編集</h2>
-<form action="EditBL" method="Post">
-<div class="table">
-<input type="hidden" name="id" value="1">
-<table>
-   <tr><th>名前*：</th><td><input type="text" name="name" value=<%=name %>></td></tr>
-   <tr><th>住所*：</th><td><input type="text" name="address" style="width:250px;" value=<%=address %>></td></tr>
-   <tr><th>電話番号：</th><td><input type="text" name="tel" value=<%=tel %>></td></tr>
-   <tr><th>カテゴリ: </th><td><select name="categoryid" style="width:154px;" >
-   
-   <% while(rs.next()) { %>
-   <%if( rs.getString("categoryid").equals(categoryid) ){ %>
-   <option value=<%=rs.getString("categoryid") %> selected><%=rs.getString("categoryname") %></option>
-     <%} %><%else{ %>
-    <option value=<%=rs.getString("categoryid") %>><%=rs.getString("categoryname") %></option>
-    <%}} %>
-    </select>
-    
-    </td>
-   </tr>
-</table>
-
+<h2>下記住所録を削除します。よろしいですか？</h2>
+<div class="table2">
+名前*：<%= name %><br>
+住所*：<%=address%><br>
+電話番号：<%=tel%><br>
+カテゴリ:<%= categoryname %><br>
+</div>
+<form action="DeleteCommitBL" method="Post">
+<input type="hidden" name="id" value=<%= id %>>
+<input type="hidden" name="name" value=<%= name %>>
+<input type="hidden" name="address" value=<%=address%>>
+<input type="hidden" name="tel" value=<%=tel%>>
+<input type="hidden" name="categoryid" value=<%= categoryid %>>
 
 </div>
 <div class=botan> 
@@ -68,6 +60,5 @@
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>
-<p><%=request.getAttribute("errmsg") %></p>
 </body>
 </html>

@@ -10,7 +10,22 @@
      String categoryid =null;
      String errmsg ="";
      
+     //カテゴリをプルダウンで表示するためにCmmon.javaでDBから昇順に取ってくる
      ResultSet rs = Cmmon.getCategoryAll();
+     
+     if( (String)request.getAttribute("name")== null){
+    	 name ="";
+    	 address ="";
+    	 tel ="";
+    	 categoryid ="";
+    	 errmsg ="";
+     }else{
+    	name= (String)request.getAttribute("name");
+     	address= (String)request.getAttribute("address");
+     	tel= (String)request.getAttribute("tel");
+     	categoryid= (String)request.getAttribute("categoryid");
+     	errmsg= (String)request.getAttribute("errmsg");
+     }
  %>
 <!DOCTYPE html>
 <html>
@@ -25,15 +40,20 @@
 <h2>住所録管理システム：住所録登録</h2>
 <form action="AddBL" method="Post">
 <div class="table">
+
+<!-- jspでjavaの変数を格納する時は % で囲む -->
 <table>
-   <tr><th>名前*：</th><td><input type="text" name="name" value=""></td></tr>
-   <tr><th>住所*：</th><td><input type="text" name="address" style="width:250px; value=""></td></tr>
-   <tr><th>電話番号：</th><td><input type="text" name="tel" value=""></td></tr>
+   <tr><th>名前*：</th><td><input type="text" name="name" value=<%=name %>></td></tr>
+   <tr><th>住所*：</th><td><input type="text" name="address" style="width:250px;" value=<%=address %>></td></tr>
+   <tr><th>電話番号：</th><td><input type="text" name="tel" value=<%=tel %>></td></tr>
    <tr><th>カテゴリ: </th><td><select name="categoryid" style="width:154px;" >
    <option value="0"></option>
    <% while(rs.next()) { %>
+ <%if( rs.getString("categoryid").equals(categoryid) ){ %>
+   <option value=<%=rs.getString("categoryid") %> selected><%=rs.getString("categoryname") %></option>
+     <%} %><%else{ %>
     <option value=<%=rs.getString("categoryid") %>><%=rs.getString("categoryname") %></option>
-    <%}     %>
+    <%}} %>
     </select>
     </td>
    </tr>
@@ -48,6 +68,7 @@
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>
-<p><%=request.getAttribute("errmsg") %></p>
+<!-- errmsgの変数を呼び出してエラー文を表示 -->
+<p><%=errmsg %></p>
 </body>
 </html>

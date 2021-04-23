@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddBL
  */
-@WebServlet("/AddBL")
-public class AddBL extends HttpServlet {
+@WebServlet("/EditBL")
+public class EditBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	   Connection conn =null;
@@ -23,7 +23,7 @@ public class AddBL extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddBL() {
+    public EditBL() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,6 +43,7 @@ public class AddBL extends HttpServlet {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
     	request.setCharacterEncoding("UTF-8");
+    	String id = request.getParameter("id");
     	String name = request.getParameter("name");
     	String address = request.getParameter("address");
     	String tel = request.getParameter("tel");
@@ -68,6 +69,7 @@ public class AddBL extends HttpServlet {
 			e.printStackTrace();
 		}
     	*/
+    	request.setAttribute("id", id);
     	request.setAttribute("name", name);
     	request.setAttribute("address", address);
     	request.setAttribute("tel", tel);
@@ -80,9 +82,9 @@ public class AddBL extends HttpServlet {
     	
     	if(errmsg != null) {
     		request.getAttribute(errmsg);
-    		request.getRequestDispatcher("/Add.jsp").forward(request, response);
+    		request.getRequestDispatcher("/Edit.jsp").forward(request, response);
     	}else
-    		request.getRequestDispatcher("/AddCheck.jsp").forward(request, response);
+    		request.getRequestDispatcher("/EditCheck.jsp").forward(request, response);
 
     	
 	}

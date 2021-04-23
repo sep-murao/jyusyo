@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class AddCommitBL
  */
-@WebServlet("/AddCommitBL")
-public class AddCommitBL extends HttpServlet {
+@WebServlet("/EditCommitBL")
+public class EditCommitBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Connection connect = null;
 	    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s?useUnicode=true&characterEncoding=utf8";
@@ -25,7 +25,7 @@ public class AddCommitBL extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AddCommitBL() {
+    public EditCommitBL() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -49,6 +49,7 @@ public class AddCommitBL extends HttpServlet {
 		 Connection connect = null;
 		 PreparedStatement stmt = null;
 		
+		 String id = request.getParameter("id");
 		 String name = request.getParameter("name");
 		 String address = request.getParameter("address");
 		 String tel = request.getParameter("tel");
@@ -67,12 +68,13 @@ public class AddCommitBL extends HttpServlet {
 		 Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.prepareStatement(
-			"insert into jyusyoroku (name,address,tel,categoryid,delete_flg)values(?,?,?,?,0);");
+			"update jyusyoroku set name=?,address=?,tel=?,categoryid=? where id=?;");
 		
 			stmt.setString(1, name);
    		    stmt.setString(2, address );
    		    stmt.setString(3, tell );
 		    stmt.setString(4, categoryid );
+		    stmt.setString(5, id);
 		    
 		   int rs = stmt.executeUpdate();
 			 
