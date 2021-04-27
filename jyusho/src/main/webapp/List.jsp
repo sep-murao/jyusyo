@@ -35,7 +35,7 @@
      //内部結合は全項目セレクト
       String sql = "select * from jyusyoroku inner join category on jyusyoroku.categoryid = category.categoryid ";
       
-      rs2 = stmt.executeQuery(sql);
+      //★★rs2 = stmt.executeQuery(sql);←2を消す
       
   }catch(Exception e){
 		e.printStackTrace();
