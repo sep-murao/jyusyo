@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+table{
+	width:100%;
+	text-align: center;
+}
+
+#site-box { width : 960px ;
+}
+
+table th{
+	background: #87cefa;
+}
+
+.kensaku{
+	position: relative;
+	left:750px;
+	
+}
+
+p{
+	position: relative;
+	left:40px;
+	bottom:16px;
+}

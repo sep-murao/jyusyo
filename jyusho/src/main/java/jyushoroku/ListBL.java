@@ -21,7 +21,7 @@ public class ListBL extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
 	Connection conn =null;
-    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s";
+    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s?useUnicode=true&characterEncoding=utf8";
     static final String USERNAME = "root";
     static final String PASSWORD = "";  
 
@@ -67,6 +67,7 @@ public class ListBL extends HttpServlet {
 				
 				ps = connect.prepareStatement(CntQuery);
 				rs = ps.executeQuery();
+				rs.next();
 				listCnt = rs.getInt("cnt");
 				
 		 } catch(Exception e){
@@ -74,14 +75,15 @@ public class ListBL extends HttpServlet {
 		 }
 
 		 
-		 if( (String)request.getParameter("SerchName")== null) {
+		 if( (String)request.getParameter("SeachName")== null) {
 			try {
 				Class.forName("com.mysql.jdbc.Driver");
 				connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				
-				String SelectQuery = "select*from jyusyo inner join category on jyusyoroku.categoryid = category.categoryid  where delete_flg = 0; ";
+				String SelectQuery = "select*from jyusyo inner join category on jyusyoroku.categoryid = category.categoryid  where delete_flg = 0 and limit ?,10; ";
 				
 				ps = connect.prepareStatement(SelectQuery);
+				ps.setInt(1, limitSta);
 				rs = ps.executeQuery();
 			
 		 }catch(Exception e){
@@ -90,17 +92,18 @@ public class ListBL extends HttpServlet {
 	
 			
 		 }else {
-			 String SerchName = request.getParameter("SerchName");
+			 String SeachName = request.getParameter("SeachName");
 			 
 			 try {
 					Class.forName("com.mysql.jdbc.Driver");
 					connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 					
-					String SelectQuery = "select*from jyusyo inner join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0, address like %?% limit ?,10";
+					String SelectQuery = "select * from jyusyoroku inner join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0 and address like ? limit ?,10; ";
+
 					
 					ps = connect.prepareStatement(SelectQuery);
-					ps.setString(1, "SerchName" );
-					ps.setString(2, "SerchName" );
+					ps.setString(1, SeachName + "%" );
+					ps.setInt(2, limitSta);
 					rs = ps.executeQuery();
 				
 			 }catch(Exception e){

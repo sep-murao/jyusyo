@@ -12,7 +12,7 @@ public class Cmmon {
 	private static final String ResultSet = null;
 	
 	   Connection conn =null;
-	    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s";
+	    static final String URL = "jdbc:mysql://localhost/jyusyoroku_s?useUnicode=true&characterEncoding=utf8";
 	    static final String USERNAME = "root";
 	    static final String PASSWORD = "";  
 

@@ -5,21 +5,11 @@
     
  <% 
  
-     /*
-     String name =null;
-     String address =null;
-     String tel =null;
-     String categoryid =null;
-     
-     //★☆★TODO 前画面からのリクエストを変数に格納★☆★
-     */
-     //動作確認用	--start
-     String id = "1";
-     String name ="村尾美波";
-     String address ="平塚";
-     String tel ="090-1111-2222";
-     String categoryid ="1";
-     //動作確認用	--end
+ String id = request.getParameter("id");
+ String name = request.getParameter("name");
+ String address = request.getParameter("address");
+ String tel = request.getParameter("tel");
+ String categoryid = request.getParameter("categoryid");
      
      String errmsg ="";
      
@@ -60,5 +50,6 @@
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>
+<p><%=errmsg %></p>
 </body>
 </html>
