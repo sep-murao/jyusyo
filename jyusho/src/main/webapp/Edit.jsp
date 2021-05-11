@@ -1,21 +1,35 @@
 <%@page import= "jyushoroku.Cmmon"%>
 <%@page import="java.sql.ResultSet"%>
+<%@page import="jyushoroku.EditBL"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
  <% 
- 
- String name = request.getParameter("name");
- String address = request.getParameter("address");
- String tel = request.getParameter("tel");
- String categoryid = request.getParameter("categoryid");
      
      //★☆★TODO 前画面からのリクエストを変数に格納★☆★
 
-     
+     String name =null;
+     String address =null;
+     String tel =null;
+     String categoryid =null;
      String errmsg ="";
      
      ResultSet rs = Cmmon.getCategoryAll();
+     
+     if( (String)request.getAttribute("name")== null){
+     	name= request.getParameter("name");
+     	address= request.getParameter("address");
+     	tel= request.getParameter("tel");
+     	categoryid= request.getParameter("categoryid");
+     	 errmsg ="";
+     	
+     }else{
+     	name= (String)request.getAttribute("name");
+     	address= (String)request.getAttribute("address");
+     	tel= (String)request.getAttribute("tel");
+     	categoryid= (String)request.getAttribute("categoryid");
+     	errmsg= (String)request.getAttribute("errmsg");
+     }
      
      
  %>
@@ -56,7 +70,7 @@
 <div class=botan> 
 <input type="submit" value="確認" style="width:150px" id="button">
 </form>
-<form method="POST" action="List.java" name="seni2">
+<form method="POST" action="ListBL.java" name="seni2">
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>

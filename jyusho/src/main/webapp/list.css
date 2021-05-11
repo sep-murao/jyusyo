@@ -20,6 +20,10 @@ table th{
 
 p{
 	position: relative;
-	left:40px;
+	left:44px;
 	bottom:16px;
+}
+
+.Paging li{
+	display:inline;
 }

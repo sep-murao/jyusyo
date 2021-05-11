@@ -80,7 +80,7 @@ public class AddCommitBL extends HttpServlet {
 				e.printStackTrace();
 	}
 	
-		 response.sendRedirect("/ListBL.java");
+		 request.getRequestDispatcher("/ListBL").forward(request, response);
 		 
 }
 	

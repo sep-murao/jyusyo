@@ -40,6 +40,11 @@
 <input type="submit" value="確認" style="width:150px" id="button">
 </form>
 <form method="GET" action="Add.jsp" name="seni2">
+<input type="hidden" name="name" value=<%= name %>>
+<input type="hidden" name="address" value=<%=address%>>
+<input type="hidden" name="tel" value=<%=tel%>>
+<input type="hidden" name="categoryid" value=<%= categoryid %>>
+
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>

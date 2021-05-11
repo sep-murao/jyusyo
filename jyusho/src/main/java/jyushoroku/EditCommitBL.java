@@ -35,7 +35,10 @@ public class EditCommitBL extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		
+		
 	}
 
 	/**
@@ -44,7 +47,8 @@ public class EditCommitBL extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
+		
 		 request.setCharacterEncoding("UTF-8");			//日本語文字コード リクエスト前に記入
 		 Connection connect = null;
 		 PreparedStatement stmt = null;
@@ -55,7 +59,7 @@ public class EditCommitBL extends HttpServlet {
 		 String tel = request.getParameter("tel");
 		 String categoryid = request.getParameter("categoryid");
 		 
-		 //電話番号抜き出し
+		 //電話番号抜き出し(ハイフン取り除き)
 		 String tel1 = tel.substring(0,3);
 		 String tel2 = tel.substring(4,8);
 		 String tel3 = tel.substring(9,13);
@@ -82,7 +86,8 @@ public class EditCommitBL extends HttpServlet {
 				e.printStackTrace();
 	}
 	
-		 response.sendRedirect("/ListBL.java");
+		 request.getRequestDispatcher("/ListBL").forward(request, response);
+
 		 
 }
 	

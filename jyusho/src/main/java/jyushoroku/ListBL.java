@@ -80,7 +80,7 @@ public class ListBL extends HttpServlet {
 				Class.forName("com.mysql.jdbc.Driver");
 				connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				
-				String SelectQuery = "select*from jyusyo inner join category on jyusyoroku.categoryid = category.categoryid  where delete_flg = 0 and limit ?,10; ";
+				String SelectQuery = "select*from jyusyoroku inner join category on jyusyoroku.categoryid = category.categoryid where delete_flg = 0 limit ?,10; ";
 				
 				ps = connect.prepareStatement(SelectQuery);
 				ps.setInt(1, limitSta);
@@ -123,7 +123,7 @@ public class ListBL extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//doGet(request, response);
+		doGet(request, response);
 		
 	
 		 

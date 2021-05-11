@@ -17,7 +17,7 @@
 <head>
 <link rel="stylesheet" href="Check.css">
 <meta charset="UTF-8">
-<title>AddCheck</title>
+<title>EditCheck</title>
 
 
 </head>
@@ -40,7 +40,15 @@
 <div class=botan2> 
 <input type="submit" value="確認" style="width:150px" id="button">
 </form>
+
+<!-- actionでデータを送信する。hiddenに送るデータを格納  -->
 <form method="GET" action="Edit.jsp" name="seni2">
+<input type="hidden" name="id" value=<%= id %>>
+<input type="hidden" name="name" value=<%= name %>>
+<input type="hidden" name="address" value=<%=address%>>
+<input type="hidden" name="tel" value=<%=tel%>>
+<input type="hidden" name="categoryid" value=<%= categoryid %>>
+
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>

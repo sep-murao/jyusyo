@@ -10,7 +10,6 @@
   
   Statement stmt = null;
   Connection con = null;
-  ResultSet rs2 = null;
   
   nowPage = (String)request.getAttribute("Page");
   listCnt = (int)request.getAttribute("listCnt");
@@ -35,7 +34,6 @@
      //内部結合は全項目セレクト
       String sql = "select * from jyusyoroku inner join category on jyusyoroku.categoryid = category.categoryid ";
       
-      //★★rs2 = stmt.executeQuery(sql);←2を消す
       
   }catch(Exception e){
 		e.printStackTrace();
@@ -51,10 +49,13 @@
 <body>
 <h2>住所録管理システム：住所録一覧</h2>
 
+<!-- 新規登録 -->
 <form method="POST" action="Add.jsp" name="">
 <input type="submit" value="新規登録" style="width:150px" id="">
 </form>
 
+
+<!--検索ボタン -->
 <div class=kensaku>
 <form method="GET" action="ListBL" name="">
 	住所：
@@ -65,8 +66,26 @@
 
 <!-- ページング -->
 
+<ul class="Paging">
+	<li> <a href= "" > << </a> </li>
+	<li> <a href= "" > < </a> </li>
+	
+	<!--選択中の数字の位置調整 -->
+	 <%if(nowPage == 1 OR nowPage == 2){%>
+	<li> <a href= "" >  </a> </li>
+	
+	<%}else if( 2 < nowPage <9 ){ %>
+	<li> <a href= "" >  </a> </li>
+	
+	<%}else{ %>
+	<li> <a href= "" > > </a> </li>
+	<%} %>
+	
+	<li> <a href= "" > > </a> </li>
+	<li> <a href= "" > >> </a> </li>
+</ul>
 
-
+<!-- 表一覧 -->
 <table border="2" style="border-collapse: collapse">
 	<tr>
 		<th>No.</th>
@@ -76,14 +95,21 @@
 		<th>カテゴリ</th>
 		<th colspan="2"></th>
 	</tr>
-	 <%while(rs2.next()) {
-		 int id = rs2.getInt("id");
-	     String name = rs2.getString("name");
-	     String address = rs2.getString("address");
-	     //電話番号はString
-	     String tel = rs2.getString("tel");
-	     String categoryname = rs2.getString("categoryname");
-	     String categoryid = rs2.getString("categoryid");
+	 <%while(rs.next()) {
+		 int id = rs.getInt("id");
+	     String name = rs.getString("name");
+	     String address = rs.getString("address");
+
+	     //ハイフンを付ける
+	     String tel4 = rs.getString("tel").substring(0,3);
+		 String tel5 = rs.getString("tel").substring(3,7);
+		 String tel6 = rs.getString("tel").substring(7,11);
+		 
+		 String tel = tel4 + "-" + tel5 + "-" + tel6;
+	     //電話番号はString 
+	     
+	     String categoryname = rs.getString("categoryname");
+	     String categoryid = rs.getString("categoryid");
 	 %>
 	 <tr>
 	 <!--  jspに渡すときはGET-->
