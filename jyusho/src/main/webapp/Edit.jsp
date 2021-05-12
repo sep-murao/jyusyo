@@ -70,7 +70,7 @@
 <div class=botan> 
 <input type="submit" value="確認" style="width:150px" id="button">
 </form>
-<form method="POST" action="ListBL.java" name="seni2">
+<form method="POST" action="ListBL" name="seni2">
 <input type="submit" value="戻る" style="width:150px" id="button2"> <!-- 戻るのtypeは保留 -->
 </form>
 </div>
