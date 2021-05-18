@@ -6,6 +6,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
 import java.util.regex.Pattern;
+
+import com.mysql.cj.util.StringUtils;
+
 import java.sql.ResultSet;
 
 public class Cmmon {
@@ -24,25 +27,29 @@ public class Cmmon {
 		String ERRMSG_ADDRESS01 ="住所は全角40文字以内で入力してください";
 		String ERRMSG_ADDRESS02 ="住所は必須項目です";
 		String ERRMSG_TEL ="電話番号は「000-0000-0000」の形式で入力してください";
-		String returnVal = null;
+		String returnVal = "";
 		Pattern p=Pattern.compile("^\\d{3}-\\d{4}-\\d{4}$");
 		
 	try {
 			
-		if(name.getBytes("UTF-8").length>40) {
-			returnVal = ERRMSG_NAME01+"<br>";
+		System.out.println(StringUtils.getBytes(name, "UTF-8"));      //バイト数チェック
+		System.out.println(StringUtils.getBytes(name));
+		System.out.println(name.getBytes("UTF-8").length);
+		
+		if(name.length()>20) {
+			returnVal = returnVal + ERRMSG_NAME01+"<br>";
 			
-		}else if(name.getBytes("UTF-8").length==0) {
-			returnVal = ERRMSG_NAME02+"<br>";
+		}if(name.getBytes("UTF-8").length==0) {
+			returnVal =returnVal + ERRMSG_NAME02+"<br>";
 			
-		}else if(address.getBytes("UTF-8").length>80) {
-			returnVal = ERRMSG_ADDRESS01+"<br>";
+		}if(address.length()>40) {
+			returnVal = returnVal + ERRMSG_ADDRESS01+"<br>";
 			
-		}else if(address.getBytes("UTF-8").length==0) {
-			returnVal = ERRMSG_ADDRESS02+"<br>";
+		}if(address.getBytes("UTF-8").length==0) {
+			returnVal = returnVal + ERRMSG_ADDRESS02+"<br>";
 			
-		} else if(tel.getBytes("UTF-8").length> 0 && !(p.matcher(tel).find())) {
-			returnVal = ERRMSG_TEL+"<br>";	
+		} if(tel.getBytes("UTF-8").length> 0 && !(p.matcher(tel).find())) {
+			returnVal =returnVal +  ERRMSG_TEL+"<br>";	
 			}
 				
 				

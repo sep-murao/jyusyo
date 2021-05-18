@@ -63,7 +63,7 @@ public class ListBL extends HttpServlet {
 				connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 				
 				//全件数取得
-				String CntQuery = "select count(*) cnt from jyusyoroku;";
+				String CntQuery = "select count(*) cnt  from jyusyoroku where delete_flg = 0;";
 				
 				ps = connect.prepareStatement(CntQuery);
 				rs = ps.executeQuery();
@@ -102,7 +102,7 @@ public class ListBL extends HttpServlet {
 
 					
 					ps = connect.prepareStatement(SelectQuery);
-					ps.setString(1, SeachName + "%" );
+					ps.setString(1, "%" + SeachName + "%" );
 					ps.setInt(2, limitSta);
 					rs = ps.executeQuery();
 				
@@ -113,7 +113,7 @@ public class ListBL extends HttpServlet {
          }
 		 request.setAttribute("listCnt", listCnt);
 		 request.setAttribute("Result", rs);
-		 request.setAttribute("page", nowPage);
+		 request.setAttribute("Page", nowPage);
 		 
 		 request.getRequestDispatcher("/List.jsp").forward(request, response);
 	}

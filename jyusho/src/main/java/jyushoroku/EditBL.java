@@ -80,7 +80,8 @@ public class EditBL extends HttpServlet {
    
     	
     	
-    	if(errmsg != null) {
+    	//if(errmsg != null) {
+    	if(errmsg != "") {
     		request.getAttribute(errmsg);
     		request.getRequestDispatcher("/Edit.jsp").forward(request, response);
     	}else

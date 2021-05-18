@@ -61,8 +61,7 @@
    <tr><th>住所*：</th><td><input type="text" name="address" style="width:250px;" value=<%=address %>></td></tr>
    <tr><th>電話番号：</th><td><input type="text" name="tel" value=<%=tel %>></td></tr>
    <tr><th>カテゴリ: </th><td><select name="categoryid" style="width:154px;" >
-   <option value="0"></option>
-   <% while(rs.next()) { %>
+  <% while(rs.next()) { %>
  <%if( rs.getString("categoryid").equals(categoryid) ){ %>
    <option value=<%=rs.getString("categoryid") %> selected><%=rs.getString("categoryname") %></option>
      <%} %><%else{ %>

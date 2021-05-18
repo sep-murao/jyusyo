@@ -8,6 +8,7 @@
      
      //★☆★TODO 前画面からのリクエストを変数に格納★☆★
 
+     String id =null;
      String name =null;
      String address =null;
      String tel =null;
@@ -17,6 +18,7 @@
      ResultSet rs = Cmmon.getCategoryAll();
      
      if( (String)request.getAttribute("name")== null){
+    	id = request.getParameter("id");
      	name= request.getParameter("name");
      	address= request.getParameter("address");
      	tel= request.getParameter("tel");
@@ -24,6 +26,7 @@
      	 errmsg ="";
      	
      }else{
+    	 id = (String)request.getAttribute("id");
      	name= (String)request.getAttribute("name");
      	address= (String)request.getAttribute("address");
      	tel= (String)request.getAttribute("tel");
@@ -46,7 +49,7 @@
 <h2>住所録管理システム：住所録編集</h2>
 <form action="EditBL" method="Post">
 <div class="table">
-<input type="hidden" name="id" value="1">
+<input type="hidden" name="id" value=<%= id %>>
 <table>
    <tr><th>名前*：</th><td><input type="text" name="name" value=<%=name %>></td></tr>
    <tr><th>住所*：</th><td><input type="text" name="address" style="width:250px;" value=<%=address %>></td></tr>

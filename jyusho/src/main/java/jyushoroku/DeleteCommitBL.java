@@ -56,9 +56,9 @@ public class DeleteCommitBL extends HttpServlet {
 		 Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 			stmt = connect.prepareStatement(
-			"delete from jyusyoroku where id = ?;");
-		
-		    stmt.setString(1, id);
+			"UPDATE jyusyoroku SET delete_flg ='1' WHERE id=?;");
+			
+			stmt.setString(1, id);
 		    
 		   int rs = stmt.executeUpdate();
 			 

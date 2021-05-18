@@ -78,7 +78,7 @@ public class AddBL extends HttpServlet {
    
     	
     	
-    	if(errmsg != null) {
+    	if(errmsg != "") {
     		request.getAttribute(errmsg);
     		request.getRequestDispatcher("/Add.jsp").forward(request, response);
     	}else

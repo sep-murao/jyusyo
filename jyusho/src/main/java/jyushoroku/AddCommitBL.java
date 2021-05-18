@@ -45,6 +45,7 @@ public class AddCommitBL extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		// TODO Auto-generated method stub
 		//doGet(request, response);
+		
 		 request.setCharacterEncoding("UTF-8");			//日本語文字コード リクエスト前に記入
 		 Connection connect = null;
 		 PreparedStatement stmt = null;
@@ -54,14 +55,17 @@ public class AddCommitBL extends HttpServlet {
 		 String tel = request.getParameter("tel");
 		 String categoryid = request.getParameter("categoryid");
 		 
+		 if(!(tel.equals(""))) {
+		 
 		 //電話番号抜き出し
 		 String tel1 = tel.substring(0,3);
 		 String tel2 = tel.substring(4,8);
 		 String tel3 = tel.substring(9,13);
 		 
-		 String tell = tel1 + tel2 + tel3;
+		 tel = tel1 + tel2 + tel3;
 		 
 		 //response.setContentType("text/html; charset=Shift_JIS");
+		 }
 		 
 		 try {
 		 Class.forName("com.mysql.jdbc.Driver");
@@ -71,7 +75,7 @@ public class AddCommitBL extends HttpServlet {
 		
 			stmt.setString(1, name);
    		    stmt.setString(2, address );
-   		    stmt.setString(3, tell );
+   		    stmt.setString(3, tel );
 		    stmt.setString(4, categoryid );
 		    
 		   int rs = stmt.executeUpdate();
